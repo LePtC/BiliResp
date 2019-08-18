@@ -1,0 +1,1 @@
+python C:\Users\%username%\Downloads\BiliResp\Bili_resp.py >> Bili_resp.log
