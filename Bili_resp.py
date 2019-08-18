@@ -55,15 +55,15 @@ def zhineng_reply(atstr,atmid,oid,parent,root):
 
     if len(re.findall(r'用法|指南|说明|帮助|(怎么|可以)(问|查)|你(.{0,2})家|help|F1|f1',atstr)) > 0:
         po_reply('目前支持的关键词有：'+summary_list+'……详细指南见：http://github.com/LePtC/BiliResp '+ran_face(),oid,parent,root)
-        sys.exit()
+        return 0
 
     if len(re.findall(r'狸(.{0,3})叫|fox(.{0,3})say',atstr)) > 0:
         po_reply(random.choice(['嘤','嘤嘤嘤','嘤嘤嘤嘤嘤','大楚兴，陈胜王'])+ran_face(),oid,parent,root)
-        sys.exit()
+        return 0
 
     if len(re.findall(r'卖(.{0,3})萌',atstr)) > 0:
         po_reply('狸子'+random.choice(['敲','敲极'])+random.choice(['可','阔'])+'爱～'+ran_face(),oid,parent,root)
-        sys.exit()
+        return 0
 
 
 # if re.findall(r'查(.+)排名',atstr)[0] == '我'
@@ -85,17 +85,25 @@ def zhineng_reply(atstr,atmid,oid,parent,root):
 import os
 path2 = 'C:\\Users\\'+getpass.getuser()+'\\Downloads\\BiliResp\\'
 
-# 读取上次回复过的最后一个消息id（避免重复回复，假设B站这个id单增…）
+# 读取上次回复过的最后一个消息时间戳（避免重复回复，试过用id结果居然不单增…）
 last_id = int(os.popen('more '+path2+'last_id.txt').read().replace ("\n",""))
-new_id = last_id # 新回复的id中取最大者
+new_id = last_id # 新回复的时间戳中取最大者
 
 for atli in tmp['data']['items']:
-    this_id = int(atli['id'])
+    this_id = int(atli['at_time'])
     if this_id > last_id :
-        zhineng_reply(atli['item']['source_content'],atli['user']['mid'],atli['item']['subject_id'],atli['item']['source_id'],atli['item']['target_id'])
         if this_id >= new_id:
             new_id = this_id
             print('new:',new_id)
+            os.system('echo '+str(new_id)+' > '+path2+'last_id.txt')
+        try:
+            zhineng_reply(atli['item']['source_content'],atli['user']['mid'],atli['item']['subject_id'],atli['item']['source_id'],atli['item']['target_id'])
+        except Exception as e:
+            print(e)
 
-os.system('echo '+str(new_id)+' > '+path2+'last_id.txt')
+
+
+# file = open(path2+'last_id.txt', 'w')
+# file.write(str(new_id))
+# file.close()
 
