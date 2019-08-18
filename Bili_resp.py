@@ -1,5 +1,6 @@
 import requests
 import re
+import sys
 
 
 import getpass
@@ -51,9 +52,20 @@ def po_reply(msg,oid,parent,root):
 
 
 import random
+def ran_face():
+  return random.choice(['(⌒▽⌒)', '(｀・ω・´)', '(◦˙▽˙◦)', '(=・ω・=)', '_Σ:з」∠)シ', 'o(∩_∩)o', '(〜￣▽￣)〜'])
 
-if len(re.findall(r'卖(.?)萌',atstr)) > 0:
-    po_reply('狸子'+random.choice(['敲','敲极'])+random.choice(['可','阔'])+'爱～'+random.choice(['(⌒▽⌒)', '(｀・ω・´)', '(◦˙▽˙◦)', '(=・ω・=)', '_Σ:з」∠)シ']),oid,parent,root)
+if len(re.findall(r'怎么(问|查)|用法|指南|说明|帮助|你(.{0,2})家|help|F1|f1',atstr)) > 0:
+    po_reply('狸工智能的用法：http://github.com/LePtC/BiliResp '+ran_face(),oid,parent,root)
+    sys.exit()
+
+if len(re.findall(r'狸(.{0,3})叫|fox(.{0,3})say',atstr)) > 0:
+    po_reply(random.choice(['嘤','嘤嘤嘤','嘤嘤嘤嘤嘤','大楚兴，陈胜王'])+ran_face(),oid,parent,root)
+    sys.exit()
+
+if len(re.findall(r'卖(.{0,3})萌',atstr)) > 0:
+    po_reply('狸子'+random.choice(['敲','敲极'])+random.choice(['可','阔'])+'爱～'+ran_face(),oid,parent,root)
+    sys.exit()
 
 
 # if re.findall(r'查(.+)排名',atstr)[0] == '我'
