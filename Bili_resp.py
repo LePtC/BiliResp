@@ -51,12 +51,14 @@ def po_reply(msg,oid,parent,root):
     print(resp.text)
 
 
+summary_list = '用法、卖萌、狐狸叫'
+
 import random
 def ran_face():
   return random.choice(['(⌒▽⌒)', '(｀・ω・´)', '(◦˙▽˙◦)', '(=・ω・=)', '_Σ:з」∠)シ', 'o(∩_∩)o', '(〜￣▽￣)〜'])
 
-if len(re.findall(r'怎么(问|查)|用法|指南|说明|帮助|你(.{0,2})家|help|F1|f1',atstr)) > 0:
-    po_reply('狸工智能的用法：http://github.com/LePtC/BiliResp '+ran_face(),oid,parent,root)
+if len(re.findall(r'用法|指南|说明|帮助|(怎么|可以)(问|查)|你(.{0,2})家|help|F1|f1',atstr)) > 0:
+    po_reply('目前支持的关键词有：'+summary_list+'……详细指南见：http://github.com/LePtC/BiliResp '+ran_face(),oid,parent,root)
     sys.exit()
 
 if len(re.findall(r'狸(.{0,3})叫|fox(.{0,3})say',atstr)) > 0:
@@ -69,3 +71,4 @@ if len(re.findall(r'卖(.{0,3})萌',atstr)) > 0:
 
 
 # if re.findall(r'查(.+)排名',atstr)[0] == '我'
+
