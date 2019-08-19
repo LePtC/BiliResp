@@ -156,6 +156,7 @@ for atli in tmp['data']['items']:
             print('new:',new_id)
             os.system('echo '+str(new_id)+' > '+path2+'last_id.txt')
         try:
+            print(atli['item']['source_content'])
             zhineng_reply(atli['item']['source_content'],atli['user']['mid'],atli['item']['subject_id'],atli['item']['source_id'],atli['item']['target_id'],atli['item']['uri'],atli['item']['business_id'])
         except Exception as e:
             print(e)
