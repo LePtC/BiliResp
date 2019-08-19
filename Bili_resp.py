@@ -87,10 +87,10 @@ def zhineng_reply(atstr,atmid,oid,parent,root,uri,bid):
     elif len(re.findall(r'(卖|买)(.{0,3})萌',atstr)) > 0:
         po_reply('狸子'+random.choice(['敲','敲极'])+random.choice(['可','阔'])+'爱～'+ran_face(),oid,parent,root,uri,bid)
 
-    elif len(re.findall(r'(可|喜)爱|喜欢|萌|高兴|(快|欢)乐|愉快|幸福',atstr)) > 0:
+    elif len(re.findall(r'(可|喜)爱|喜(欢|感)|萌|高兴|(快|欢)乐|愉快|幸福',atstr)) > 0:
         po_reply('狐狸搓一搓，生活欢乐多～'+ran_face(),oid,parent,root,uri,bid)
 
-    elif len(re.findall(r'你是|真人|自(.{0,3})介绍|介绍(.{0,4})自',atstr)) > 0:
+    elif len(re.findall(r'你是谁|真人|自(.{0,3})介绍|介绍(.{0,4})自',atstr)) > 0:
         po_reply('我是狸子LePtC研发'+random.choice(['','时长两天半'])+'的虚拟UP主'+random.choice(['～','鸭'])+ran_face(),oid,parent,root,uri,bid)
 
     elif len(re.findall(r'狸子(.{0,4})(生日|几岁|多大|出生|破壳)',atstr)) > 0:
