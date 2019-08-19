@@ -60,7 +60,7 @@ def po_reply(msg,oid,parent,root,uri,bid):
     print(resp.text)
 
 
-summary_list = '用法、卖萌、狸叫'
+summary_list = '用法、复读、卖萌、狸叫'
 
 import random
 def ran_face():
@@ -73,6 +73,9 @@ def zhineng_reply(atstr,atmid,oid,parent,root,uri,bid):
     if len(re.findall(r'用法|指南|说明|帮助|关键词|(怎么|可以)(问|查)|你(.{0,2})家|help',atstr)) > 0:
         po_reply('目前支持的关键词有：'+summary_list+'……详细指南见：http://github.com/LePtC/BiliResp '+ran_face(),oid,parent,root,uri,bid)
 
+    elif len(re.findall(r'复读',atstr)) > 0:
+        po_reply(atstr.replace('@狸工智能 ', '', 1).replace('@狸工智能', '', 1),oid,parent,root,uri,bid)
+
     elif len(re.findall(r'狸(.{0,3})叫|fox(.{0,3})say',atstr)) > 0:
         po_reply(random.choice(['嘤','嘤嘤嘤','嘤嘤嘤嘤嘤','大楚兴，陈胜王'])+ran_face(),oid,parent,root,uri,bid)
 
@@ -84,9 +87,6 @@ def zhineng_reply(atstr,atmid,oid,parent,root,uri,bid):
 
     elif len(re.findall(r'你会',atstr)) > 0:
         po_reply(random.choice(['','我'])+'现在只会卖萌'+ran_han(),oid,parent,root,uri,bid)
-
-    elif len(re.findall(r'复读',atstr)) > 0:
-        po_reply(atstr.replace('@狸工智能 ', '', 1).replace('@狸工智能', '', 1),oid,parent,root,uri,bid)
 
     else:
         po_reply('（这条艾特中没有可回复的关键词'+random.choice(['～','奥'])+ran_han(),oid,parent,root,uri,bid)
