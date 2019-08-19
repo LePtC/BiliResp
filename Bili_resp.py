@@ -85,6 +85,9 @@ def zhineng_reply(atstr,atmid,oid,parent,root,uri,bid):
     elif len(re.findall(r'你会',atstr)) > 0:
         po_reply(random.choice(['','我'])+'现在只会卖萌'+ran_han(),oid,parent,root,uri,bid)
 
+    elif len(re.findall(r'复读',atstr)) > 0:
+        po_reply(atstr.replace('@狸工智能 ', '', 1).replace('@狸工智能', '', 1),oid,parent,root,uri,bid)
+
     else:
         po_reply('（这条艾特中没有可回复的关键词'+random.choice(['～','奥'])+ran_han(),oid,parent,root,uri,bid)
 
