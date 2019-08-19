@@ -64,9 +64,9 @@ summary_list = '用法、复读、卖萌、狸叫'
 
 import random
 def ran_face():
-  return random.choice(['(⌒▽⌒)', '(｀・ω・´)', '(◦˙▽˙◦)', '(=・ω・=)', '_Σ:з」∠)シ', 'o(∩_∩)o', '(〜￣▽￣)〜','>_<'])
+  return random.choice(['(⌒▽⌒)', '(｀・ω・´)', '(◦˙▽˙◦)', '(=・ω・=)', '_Σ:з」∠)シ', 'o(∩_∩)o', '(〜￣▽￣)〜','>_<', '(๑• ▽ •๑)'])
 def ran_han():
-  return random.choice(['(;¬_¬)', '(~_~;)', ' = =!', '╮(╯▽╰)╭', '(シ_ _)シ', '>_<'])
+  return random.choice(['(;¬_¬)', '(~_~;)', ' = =!', '╮(╯▽╰)╭', '(シ_ _)シ', '>_<', '(๑• _ •๑)'])
 
 def zhineng_reply(atstr,atmid,oid,parent,root,uri,bid):
 
