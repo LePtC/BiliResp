@@ -26,16 +26,31 @@ bilibili_headers.update( {'Cookie' : cookie} )
 import json
 tmp = json.loads(requests.get("https://api.bilibili.com/x/msgfeed/at", headers = bilibili_headers).text)
 
+bilibili_headers2 = {a:b for a,b in re.findall(r'([^:\n]+): (.+)', '''
+Host: api.bilibili.com
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:56.0) Gecko/20100101 Firefox/56.0 Waterfox/56.2.12
+Accept: application/json, text/javascript, */*; q=0.01
+Accept-Language: zh-CN,en-US;q=0.7,en;q=0.3
+Accept-Encoding: gzip, deflate, br
+Content-Type: application/x-www-form-urlencoded; charset=UTF-8
+Content-Length: 224
+DNT: 1
+Connection: keep-alive
+Content-Length: 234
+''')}
+bilibili_headers2.update( {'Cookie' : cookie} )
 
+from urllib.parse import urlparse
 
-def po_reply(msg,oid,parent,root):
+def po_reply(msg,oid,parent,root,uri,bid):
+    print(uri)
+    bilibili_headers2.update( {'Referer' : uri} )
+    bilibili_headers2.update( {'Origin' : 'https://'+urlparse(uri).hostname} )
     resp = requests.post('https://api.bilibili.com/x/v2/reply/add',
-                  headers={'Host':'api.bilibili.com',
-                           'Cookie': cookie,
-                           'Refer': "https://t.bilibili.com"},
+                  headers=bilibili_headers2,
                   data = {"csrf": csrf,
                         "oid": oid,
-                        "type": "11",
+                        "type": bid, #专栏是www.12，动态t.17，相册h.11
                         "root": root,
                         "parent": parent,
                         "message": msg,
@@ -51,18 +66,18 @@ import random
 def ran_face():
   return random.choice(['(⌒▽⌒)', '(｀・ω・´)', '(◦˙▽˙◦)', '(=・ω・=)', '_Σ:з」∠)シ', 'o(∩_∩)o', '(〜￣▽￣)〜'])
 
-def zhineng_reply(atstr,atmid,oid,parent,root):
+def zhineng_reply(atstr,atmid,oid,parent,root,uri,bid):
 
     if len(re.findall(r'用法|指南|说明|帮助|(怎么|可以)(问|查)|你(.{0,2})家|help|F1|f1',atstr)) > 0:
-        po_reply('目前支持的关键词有：'+summary_list+'……详细指南见：http://github.com/LePtC/BiliResp '+ran_face(),oid,parent,root)
+        po_reply('目前支持的关键词有：'+summary_list+'……详细指南见：http://github.com/LePtC/BiliResp '+ran_face(),oid,parent,root,uri,bid)
         return 0
 
     if len(re.findall(r'狸(.{0,3})叫|fox(.{0,3})say',atstr)) > 0:
-        po_reply(random.choice(['嘤','嘤嘤嘤','嘤嘤嘤嘤嘤','大楚兴，陈胜王'])+ran_face(),oid,parent,root)
+        po_reply(random.choice(['嘤','嘤嘤嘤','嘤嘤嘤嘤嘤','大楚兴，陈胜王'])+ran_face(),oid,parent,root,uri,bid)
         return 0
 
     if len(re.findall(r'卖(.{0,3})萌',atstr)) > 0:
-        po_reply('狸子'+random.choice(['敲','敲极'])+random.choice(['可','阔'])+'爱～'+ran_face(),oid,parent,root)
+        po_reply('狸子'+random.choice(['敲','敲极'])+random.choice(['可','阔'])+'爱～'+ran_face(),oid,parent,root,uri,bid)
         return 0
 
 
@@ -97,7 +112,7 @@ for atli in tmp['data']['items']:
             print('new:',new_id)
             os.system('echo '+str(new_id)+' > '+path2+'last_id.txt')
         try:
-            zhineng_reply(atli['item']['source_content'],atli['user']['mid'],atli['item']['subject_id'],atli['item']['source_id'],atli['item']['target_id'])
+            zhineng_reply(atli['item']['source_content'],atli['user']['mid'],atli['item']['subject_id'],atli['item']['source_id'],atli['item']['target_id'],atli['item']['uri'],atli['item']['business_id'])
         except Exception as e:
             print(e)
 
