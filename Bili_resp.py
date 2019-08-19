@@ -60,15 +60,17 @@ def po_reply(msg,oid,parent,root,uri,bid):
     print(resp.text)
 
 
-summary_list = '用法、卖萌、狐狸叫'
+summary_list = '用法、卖萌、狸叫'
 
 import random
 def ran_face():
-  return random.choice(['(⌒▽⌒)', '(｀・ω・´)', '(◦˙▽˙◦)', '(=・ω・=)', '_Σ:з」∠)シ', 'o(∩_∩)o', '(〜￣▽￣)〜'])
+  return random.choice(['(⌒▽⌒)', '(｀・ω・´)', '(◦˙▽˙◦)', '(=・ω・=)', '_Σ:з」∠)シ', 'o(∩_∩)o', '(〜￣▽￣)〜','>_<'])
+def ran_han():
+  return random.choice(['(;¬_¬)', '(~_~;)', ' = =!', '╮(╯▽╰)╭', '(シ_ _)シ','>_<'])
 
 def zhineng_reply(atstr,atmid,oid,parent,root,uri,bid):
 
-    if len(re.findall(r'用法|指南|说明|帮助|(怎么|可以)(问|查)|你(.{0,2})家|help|F1|f1',atstr)) > 0:
+    if len(re.findall(r'用法|指南|说明|帮助|(怎么|可以)(问|查)|你(.{0,2})家|help',atstr)) > 0:
         po_reply('目前支持的关键词有：'+summary_list+'……详细指南见：http://github.com/LePtC/BiliResp '+ran_face(),oid,parent,root,uri,bid)
         return 0
 
@@ -78,6 +80,14 @@ def zhineng_reply(atstr,atmid,oid,parent,root,uri,bid):
 
     if len(re.findall(r'卖(.{0,3})萌',atstr)) > 0:
         po_reply('狸子'+random.choice(['敲','敲极'])+random.choice(['可','阔'])+'爱～'+ran_face(),oid,parent,root,uri,bid)
+        return 0
+
+    if len(re.findall(r'你是',atstr)) > 0:
+        po_reply('我是狸子LePtC研发'+random.choice(['','时长两天半'])+'的虚拟UP主'+random.choice(['～','鸭'])+ran_face(),oid,parent,root,uri,bid)
+        return 0
+
+    if len(re.findall(r'你会',atstr)) > 0:
+        po_reply(random.choice(['','我'])+'现在只会卖萌'+ran_han(),oid,parent,root,uri,bid)
         return 0
 
 
