@@ -1,5 +1,6 @@
 # Build and Release Folders
 backup/
+cap/
 
 # Other files and folders
 .settings/

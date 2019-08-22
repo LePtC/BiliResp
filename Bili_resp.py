@@ -43,6 +43,7 @@ bilibili_headers2.update( {'Cookie' : cookie} )
 from urllib.parse import urlparse
 
 def po_reply(msg,oid,parent,root,uri,bid):
+    print(msg)
     print(uri)
     bilibili_headers2.update( {'Referer' : uri} )
     bilibili_headers2.update( {'Origin' : 'https://'+urlparse(uri).hostname} )
@@ -74,11 +75,12 @@ import difflib
 def zhineng_reply(atstr,atmid,oid,parent,root,uri,bid):
 
     atstr = atstr.replace('@狸工智能 ', '', 1).replace('@狸工智能', '', 1)
+    atstr_clean = atstr.strip('？！，。；“”‘’?!,.;"…一个啊吧的是了我你他们说不在有这个上来到时为什么啥人')
 
     if len(re.findall(r'用法|指南|说明|帮助|关键词|(怎么|可以)(问|查)|你(.{0,2})家|help',atstr)) > 0:
         po_reply('目前狸工智能会'+summary_list+'详细指南见：http://github.com/LePtC/BiliResp '+ran_face(),oid,parent,root,uri,bid)
 
-    elif len(re.findall(r'复读',atstr)) > 0:
+    elif len(re.findall(r'复读|人类(.{0,3})本质',atstr)) > 0:
         po_reply(atstr,oid,parent,root,uri,bid)
 
     elif len(re.findall(r'(n|牛|流)(b|B|比|逼|弊|蔽|啤)',atstr)) > 0:
@@ -111,12 +113,10 @@ def zhineng_reply(atstr,atmid,oid,parent,root,uri,bid):
     elif len(re.findall(r'你会',atstr)) > 0:
         po_reply(random.choice(['','我'])+'现在会的有'+summary_list+ran_han(),oid,parent,root,uri,bid)
 
-    atstr_clean = atstr.strip('一个啊的是了我你他们说不在有这个上来到时为什么啥')
-
     elif len(re.findall(r'笑话|段子|聊|唠嗑',atstr)) > 0:
         with open(path2+'jokes.txt', 'r', encoding='utf-8') as file:
             joke_list = [x.replace ("\n","") for x in file.readlines()]
-        close_jokes = difflib.get_close_matches(atstr_clean.strip('讲笑话段子聊唠嗑人'), joke_list, 2, 0.01)
+        close_jokes = difflib.get_close_matches(atstr_clean.strip('讲笑话段子聊唠嗑'), joke_list, 2, 0.01)
         if len(close_jokes) > 0:
             po_joke = random.choice(close_jokes)
         else:
@@ -139,19 +139,19 @@ def zhineng_reply(atstr,atmid,oid,parent,root,uri,bid):
 
         with open(path2+'lyrics.txt', 'r', encoding='utf-8') as file:
             lyric_list = [x.replace ("\n","") for x in file.readlines()]
-        close_txt = difflib.get_close_matches(atstr_clean, lyric_list, 2, 0.075)
+        close_txt = difflib.get_close_matches(atstr_clean, lyric_list, 2, 0.15)
         if len(close_txt) > 0:
             po_txt = random.choice(close_txt)
         else:
             with open(path2+'popus.txt', 'r', encoding='utf-8') as file:
                 popu_list = [x.replace ("\n","") for x in file.readlines()]
-            close_txt = difflib.get_close_matches(atstr_clean, popu_list, 2, 0.04)
+            close_txt = difflib.get_close_matches(atstr_clean, popu_list, 2, 0.07)
             if len(close_txt) > 0:
                 po_txt = random.choice(close_txt)
             else:
                 with open(path2+'poems.txt', 'r', encoding='utf-8') as file:
                     poem_list = [x.replace ("\n","") for x in file.readlines()]
-                close_txt = difflib.get_close_matches(atstr_clean, poem_list, 2, 0.1)
+                close_txt = difflib.get_close_matches(atstr_clean, poem_list, 2, 0.05)
                 if len(close_txt) > 0:
                     po_txt = random.choice(close_txt)
                 else:
