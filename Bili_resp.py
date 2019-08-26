@@ -90,7 +90,7 @@ import difflib
 def zhineng_reply(atstr,atmid,oid,parent,root,uri,bid):
 
     # 不友好不回（后期注意避开UP名字
-    if len(re.findall(r'(?i)给爷|wcn|cnm|nm(b|d|s)|尼玛|艹|骂|弟弟|dd|kkp',atstr)) > 0:
+    if len(re.findall(r'(?i)给爷|wcn|cnm|nm(b|d|s)|尼玛|艹|骂|弟弟|dd|kkp|废青',atstr)) > 0:
         print('检测到不友好')
         po_txt = ''
         return 0
@@ -121,7 +121,9 @@ def zhineng_reply(atstr,atmid,oid,parent,root,uri,bid):
             po_txt = '敲可爱的狸子LePtC，是个宝藏UP主' + ran_face()
         elif len(re.findall(r'喜欢说',atstr)) > 0:
             po_txt = random.choice(['嘤嘤嘤','狸子敲'+random.choice(['可','阔'])+'爱～','狐狸搓一搓，生活欢乐多～']) + ran_face()
-        elif len(re.findall(r'(?i)榜|nb',atstr)) > 0:
+        elif len(re.findall(r'掉粉',atstr)) > 0:
+            po_txt = random.choice(['嘤嘤嘤','我觉得布星']) + ran_han()
+        elif len(re.findall(r'(?i)榜|nb|第一',atstr)) > 0:
             po_txt = random.choice(['嘤嘤嘤','狸子冲鸭～','狸子加油！']) + ran_face()
         elif len(re.findall(r'你(.{0,2})(喜欢|稀饭)',atstr)) > 0:
             po_txt = random.choice(['人人都喜欢狸子啦','狸子'+random.choice(['敲','敲极'])+random.choice(['可','阔'])+'爱～','狸子敲可爱，想…'])
@@ -154,9 +156,6 @@ def zhineng_reply(atstr,atmid,oid,parent,root,uri,bid):
     elif len(re.findall(r'(卖|买)(.{0,3})萌',atstr)) > 0:
         po_txt = '狸子'+random.choice(['敲','敲极'])+random.choice(['可','阔'])+'爱～'+ran_face()
 
-    elif len(re.findall(r'你(.{0,1})会',atstr)) > 0:
-        po_txt = random.choice(['俺','我'])+'现在会'+summary_list+ran_face()
-
     elif len(re.findall(r'笑话|段子|聊|唠嗑|(智|制|滞)(.{0,2})(障|杖|帐|涨)|笨蛋|你(.{0,4})抽|沙雕|傻|骚话',atstr)) > 0:
 
         close_jokes = difflib.get_close_matches(stripall(atstr_clean,'讲个笑话段子聊唠嗑狸工智制滞障杖帐涨笨蛋抽沙雕傻骚话'), joke_list, 9, 0.01)
@@ -165,11 +164,10 @@ def zhineng_reply(atstr,atmid,oid,parent,root,uri,bid):
         else:
             po_txt = random.choice(joke_list)
 
-
     elif len(re.findall(r'睡(觉|啦)|晚安|失眠|这么晚|凌晨',atstr)) > 0: # TODO 睡了吗
         po_txt = random.choice(['晚安啦～祝你睡个好觉','天上的星星不说话，地上的娃娃想妈妈','夜莺代我向你道晚安','还不快睡觉 '])+ran_face()
 
-    elif len(re.findall(r'报废|垃圾',atstr)) > 0:
+    elif len(re.findall(r'(报|收)废|垃圾',atstr)) > 0:
         po_txt = random.choice(['我真的还想再活五百年——','我属于什么垃圾？','没有治疗价值了，拉到河边烤了吧','我没有中暑也没有抑郁，每天吃的不多也不少，我不漂亮也不丑，没有淋雨也不打架…'])+ran_han()
 
     elif len(re.findall(r'博士',atstr)) > 0:
@@ -194,7 +192,7 @@ def zhineng_reply(atstr,atmid,oid,parent,root,uri,bid):
         po_txt = random.choice(['当初就不该吃那个热狗.jpg','王司徒！（战争践踏.jpg'])+ran_face()
 
     elif len(re.findall(r'蔡|(徐|虚)坤|cxk|鸡你|太美',atstr)) > 0:
-        cxk_txt = ['喜欢唱，跳，rap，律师函','吾与城北徐坤孰美？','君美甚，徐坤何能及君也','我夏天喜欢去海滩，因为基尼太美','庄颜坐在罗辑边上，眼里冒着小星星。罗辑笑着问：你一直看着我干嘛？庄颜花痴地说：辑你太美','一千年后，人类社会高度发达，但是煤的存量也一天天减少，科学家为了解决这一困境，运用拟态理论成功复制出了代替品，即拟态煤']
+        cxk_txt = ['喜欢唱，跳，rap，律师函','吾与城北徐坤孰美？','君美甚，徐坤何能及君也','我夏天喜欢去海滩，因为基尼太美','棘皮动物太美了，简称棘你太美','庄颜坐在罗辑边上，眼里冒着小星星。罗辑笑着问：你一直看着我干嘛？庄颜花痴地说：辑你太美','一千年后，人类社会高度发达，但是煤的存量也一天天减少，科学家为了解决这一困境，运用拟态理论成功复制出了代替品，即拟态煤']
         close_txt = difflib.get_close_matches(stripall(atstr_clean,'蔡徐坤cxk鸡你太美'), popu_list, 5, 0.1)
         if len(close_txt) > 0:
             po_txt = random.choice(close_txt+cxk_txt)
@@ -262,6 +260,9 @@ def zhineng_reply(atstr,atmid,oid,parent,root,uri,bid):
 
     elif len(re.findall(r'(n|牛|流)(b|B|比|逼|弊|蔽|啤)',atstr)) > 0:
         po_txt = random.choice(['狸子nb！','狸子nb！（破音'])+ran_face()
+
+    elif len(re.findall(r'你(.{0,1})会',atstr)) > 0:
+        po_txt = random.choice(['俺','我'])+'现在会'+summary_list+ran_face()
 
     elif len(re.findall(r'[^原下]来|gkd',atstr)) > 0:
         po_txt = random.choice(['来了来了咕咕','在路上了咕咕','来啊，复相伤害啊','来啊，快活啊','来～试试就逝世','来了老弟～'])+ran_face()
