@@ -100,7 +100,7 @@ def zhineng_reply(atstr,atmid,oid,parent,root,uri,bid):
     temp_face = re.findall(r'\[(.{1,10})\]',atstr)
     if len(temp_face) > 0:
         atstr = atstr.replace('['+temp_face[0]+']', '')
-    atstr_clean = stripall(atstr,'？！，。；“”‘’（）@?!,.;"()…一个啊吧啦的是了我你他们说不在有这个上下来到时为什么怎样啥呢人和如果何要接')
+    atstr_clean = stripall(atstr,'？！，。；“”‘’（）～@?!,.;"()…~一个啊吧啦的是了我你他们说不在有这个上下来到时为什么怎样啥呢人和如果何要接')
 
 
     if len(re.findall(r'用法|指南|说明|帮助|关键词|(怎么|可以)(问|查)|help',atstr)) > 0:
@@ -165,7 +165,7 @@ def zhineng_reply(atstr,atmid,oid,parent,root,uri,bid):
             po_txt = random.choice(joke_list)
 
     elif len(re.findall(r'睡(觉|啦)|晚安|失眠|这么晚|凌晨',atstr)) > 0: # TODO 睡了吗
-        po_txt = random.choice(['晚安啦～祝你睡个好觉','天上的星星不说话，地上的娃娃想妈妈','夜莺代我向你道晚安','还不快睡觉 '])+ran_face()
+        po_txt = random.choice(['晚安啦～祝你睡个好觉','天上的星星不说话，地上的娃娃想妈妈 zzZ','夜莺代我向你道晚安','快快睡个好觉 '])+ran_face()
 
     elif len(re.findall(r'(报|收)废|垃圾',atstr)) > 0:
         po_txt = random.choice(['我真的还想再活五百年——','我属于什么垃圾？','没有治疗价值了，拉到河边烤了吧','我没有中暑也没有抑郁，每天吃的不多也不少，我不漂亮也不丑，没有淋雨也不打架…'])+ran_han()
@@ -182,7 +182,7 @@ def zhineng_reply(atstr,atmid,oid,parent,root,uri,bid):
     elif len(re.findall(r'女装',atstr)) > 0:
         po_txt = random.choice(['女装只有零次和无数次','我不能露脸的，我要过十万订阅才能露','程序员穿女装能大大提升编程速度，而且还能减少BUG的发生','自学JAVA太苦了，不如…试试女装？','三流码农写UI，二流码农写架构，一流码农写算法，顶级码农穿女装','给大佬递女装.jpg'])+ran_face()
 
-    elif len(re.findall(r'dark|♂|约(吗|不)|屁股',atstr)) > 0:
+    elif len(re.findall(r'(?i)dark|♂|约(吗|不)|屁股|van',atstr)) > 0:
         po_txt = random.choice(['deep♂dark♂fantasy','啊 乖乖站好','I♂like♂van♂游戏','来我家玩吧，我家还蛮大♂的','让我康康（震声'])+ran_face()
 
     elif len(re.findall(r'真香|境泽',atstr)) > 0:
