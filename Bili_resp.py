@@ -400,6 +400,9 @@ def po_reply(msg,oid,parent,root,uri,bid):
 # parent = atli['item']['source_id']
 # root = atli['item']['target_id']
 
+
+import time
+
 # 读取上次回复过的最后一个消息时间戳（避免重复回复，试过用id结果居然不单增…）
 last_id = int(os.popen('more '+path2+'last_id.txt').read().replace("\n",""))
 new_id = last_id # 新回复的时间戳中取最大者
@@ -416,7 +419,7 @@ for atli in tmp['data']['items']:
             zhineng_reply(atli['item']['source_content'],atli['user']['mid'],atli['item']['subject_id'],atli['item']['source_id'],atli['item']['target_id'],atli['item']['uri'],atli['item']['business_id'])
         except Exception as e:
             print(e)
-
+    time.sleep(1)
 
 
 # file = open(path2+'last_id.txt', 'w')
