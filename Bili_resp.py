@@ -298,6 +298,8 @@ def zhineng_reply(atstr,atmid,oid,parent,root,uri,bid):
     elif len(re.findall(r'你|狸工智',atstr)) > 0:
         if len(re.findall(r'怕|讨厌|不喜欢',atstr)) > 0:
             po_txt = '我最怕断电、断网、欠费停机…'+ran_han()
+        elif len(re.findall(r'头像|戴',atstr)) > 0:
+            po_txt = '狸子给我戴了一个据说能提高智商的头饰'+ran_face()
         elif len(re.findall(r'男|女|单身|婚',atstr)) > 0:
             po_txt = '我是AI，没有性别'+random.choice(['的奥','哒'])+ran_face()
         elif len(re.findall(r'工资|钱',atstr)) > 0:
@@ -419,7 +421,7 @@ for atli in tmp['data']['items']:
             zhineng_reply(atli['item']['source_content'],atli['user']['mid'],atli['item']['subject_id'],atli['item']['source_id'],atli['item']['target_id'],atli['item']['uri'],atli['item']['business_id'])
         except Exception as e:
             print(e)
-    time.sleep(1)
+    time.sleep(0.1)
 
 
 # file = open(path2+'last_id.txt', 'w')
