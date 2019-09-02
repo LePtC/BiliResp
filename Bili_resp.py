@@ -103,10 +103,10 @@ def zhineng_reply(atstr,atmid,oid,parent,root,uri,bid):
     atstr_clean = stripall(atstr,'？！，。；“”‘’（）～@?!,.;"()…~一个啊吧啦的是了我你他们说不在有这个上下来到时为什么怎样啥呢人和如果何要接')
 
 
-    if len(re.findall(r'用法|指南|说明|帮助|关键词|(怎么|可以)(问|查)|help',atstr)) > 0:
+    if len(re.findall(r'用法|指南|说明|帮助|功能|关键词|(怎么|可以)(问|查)|help',atstr)) > 0:
         po_txt = '问我的详细指南见：http://github.com/LePtC/BiliResp '+ran_face()
 
-    elif len(re.findall(r'（精准复读',atstr)) > 0: # 糖指令
+    elif len(re.findall(r'（精准复读',atstr)) > 0: # 糖指令，TODO 艾特自己会死循环？
         po_txt = atstr.replace('（精准复读', '', 1)
 
     elif len(re.findall(r'复读|人类(.{0,2})本质|快乐',atstr)) > 0:
@@ -200,7 +200,7 @@ def zhineng_reply(atstr,atmid,oid,parent,root,uri,bid):
 
     elif len(re.findall(r'蔡|(徐|虚)坤|cxk|鸡你|太美',atstr)) > 0:
         cxk_txt = ['喜欢唱，跳，rap，律师函','吾与城北徐坤孰美？','君美甚，徐坤何能及君也','我夏天喜欢去海滩，因为基尼太美','棘皮动物太美了，简称棘你太美','庄颜坐在罗辑边上，眼里冒着小星星。罗辑笑着问：你一直看着我干嘛？庄颜花痴地说：辑你太美','一千年后，人类社会高度发达，但是煤的存量也一天天减少，科学家为了解决这一困境，运用拟态理论成功复制出了代替品，即拟态煤']
-        close_txt = difflib.get_close_matches(stripall(atstr_clean,'蔡徐坤cxk鸡你太美'), popu_list, 5, 0.1)
+        close_txt = difflib.get_close_matches(stripall(atstr_clean,'蔡徐坤cxk鸡你太美'), popu_list, 5, 0.15)
         if len(close_txt) > 0:
             po_txt = random.choice(close_txt+cxk_txt)
         else:
@@ -208,7 +208,7 @@ def zhineng_reply(atstr,atmid,oid,parent,root,uri,bid):
 
     elif len(re.findall(r'乔(碧|奶|殿)|碧萝|坦克|按(f|F)',atstr)) > 0:
         qbl_txt = ['我不能露脸的，我要过十万订阅才能露','按F键进入坦克','榜一连夜扛着火车跑了']
-        close_txt = difflib.get_close_matches(stripall(atstr_clean,'乔碧萝奶坦克'), popu_list, 5, 0.1)
+        close_txt = difflib.get_close_matches(stripall(atstr_clean,'乔碧萝奶坦克'), popu_list, 5, 0.15)
         if len(close_txt) > 0:
             po_txt = random.choice(close_txt+qbl_txt)
         else:
@@ -216,7 +216,7 @@ def zhineng_reply(atstr,atmid,oid,parent,root,uri,bid):
 
     elif len(re.findall(r'卢本伟|lbw',atstr)) > 0:
         lbw_txt = ['没有开挂lbw','偶怀疑你消费过世主播','lbwnb!','快去请卢来佛祖','你能秒我，我就当场把这个电脑屏幕吃掉']
-        close_txt = difflib.get_close_matches(stripall(atstr_clean,'卢本伟lbw'), popu_list, 5, 0.1)
+        close_txt = difflib.get_close_matches(stripall(atstr_clean,'卢本伟lbw'), popu_list, 5, 0.15)
         if len(close_txt) > 0:
             po_txt = random.choice(close_txt+lbw_txt)
         else:
@@ -224,7 +224,7 @@ def zhineng_reply(atstr,atmid,oid,parent,root,uri,bid):
 
     elif len(re.findall(r'晓明|明言',atstr)) > 0:
         hxm_txt = ['我不要你觉得，我要我觉得，我觉得狸子敲可爱','不需要商量，都听我的，都给我点赞']
-        close_txt = difflib.get_close_matches(stripall(atstr_clean,'黄晓明言'), popu_list, 5, 0.1)
+        close_txt = difflib.get_close_matches(stripall(atstr_clean,'黄晓明言'), popu_list, 5, 0.15)
         if len(close_txt) > 0:
             po_txt = random.choice(close_txt+hxm_txt)
         else:
@@ -275,7 +275,7 @@ def zhineng_reply(atstr,atmid,oid,parent,root,uri,bid):
         po_txt = random.choice(['俺','我'])+'现在会'+summary_list+ran_face()
 
     elif len(re.findall(r'[^原下]来|gkd',atstr)) > 0:
-        po_txt = random.choice(['来了来了咕咕','在路上了咕咕','来啊，复相伤害啊','来啊，快活啊','来～试试就逝世','来了老弟～'])+ran_face()
+        po_txt = random.choice(['来了来了咕咕','在路上了咕咕','来啊，复相伤害啊','来啊，快活啊','来～（试试就逝世','来了老弟～'])+ran_face()
 
     elif len(re.findall(r'在(.{0,1})(不|吗|？|\?)',atstr)) > 0:
         po_txt = random.choice(['我在鸭 ','嗯嗯 '])+ran_face()
