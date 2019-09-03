@@ -245,7 +245,7 @@ def zhineng_reply(atstr,atmid,oid,parent,root,uri,bid):
     elif len(re.findall(r'魔鬼',atstr)) > 0:
         po_txt = random.choice(['魔鬼本鬼','冲动是魔鬼','你会写魑魅魍魉吗','一个数学家把灵魂出卖给魔鬼换黎曼猜想的证明，魔鬼说一个月后给他答复。大半年后，魔鬼垂头丧气地回来说：“我也没证出来”，然后又面露喜色：“不过我发现了一个特别有意思的引理”'])+ran_han()
 
-    elif len(re.findall(r'么么|摸(.{0,4})(狐|狸|您|你)|(可|喜)爱|喜(欢|感)|萌|高兴|(快|欢)乐|愉快|幸福|好玩|笑死|xswl',atstr)) > 0:
+    elif len(re.findall(r'么么|摸(.{0,4})(狐|狸|您|你)|狸(.{0,2})(搓|揉|摸|滚)|(可|喜)爱|喜(欢|感)|萌|高兴|(快|欢)乐|愉快|幸福|好玩|笑死|xswl',atstr)) > 0:
         po_txt = random.choice(['狐狸搓一搓，生活欢乐多～','狐狸揉一揉，生活无忧愁～','狐狸摸一摸，生活欢乐多～','狐狸滚一滚，paper秒过审～'])+ran_face()
 
     elif len(re.findall(r'诗|文言',atstr)) > 0:
