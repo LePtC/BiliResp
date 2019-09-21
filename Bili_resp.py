@@ -113,7 +113,7 @@ def zhineng_reply(atstr,atmid,oid,parent,root,uri,bid):
         po_txt = atstr.replace('我', '你')
 
     elif len(re.findall(r'你(.{0,4})回|回复|回(.{0,1})我',atstr)) > 0:
-        po_txt = '目前每5分钟看一次艾特（B站任意评论区艾特均可），每次最多回20条，如果消息太多遇到验证码我就回不了啦 '+ran_han()
+        po_txt = '目前每10分钟看一次艾特（B站任意评论区艾特均可），每次最多回20条，如果消息太多遇到验证码我就回不了啦 '+ran_han()
 
     elif len(re.findall(r'博士',atstr)) > 0:
         po_txt = random.choice(phd_list)+ran_han()
@@ -166,7 +166,7 @@ def zhineng_reply(atstr,atmid,oid,parent,root,uri,bid):
                 po_txt = '你想问狸子什么？' + ran_face()
 
 
-    elif len(re.findall(r'你是|真人|自(.{0,3})介绍|介绍(.{0,4})自|你(.{0,3})(爸|妈|父|母|主)(.{0,3})(是|谁)',atstr)) > 0: # 把你是谁放宽到你是了…
+    elif len(re.findall(r'你是谁|真人|自(.{0,3})介绍|介绍(.{0,4})自|你(.{0,3})(爸|妈|父|母|主)(.{0,3})(是|谁)',atstr)) > 0: # TODO 把你是谁放宽到你是了…
         po_txt = '我是狸子LePtC研发'+random.choice(['','时长两天半'])+'的虚拟UP主'+random.choice(['～','鸭'])+ran_face()
 
     elif len(re.findall(r'狸(.{0,3})叫|fox(.{0,3})say|嘤',atstr)) > 0:
@@ -421,7 +421,7 @@ for atli in tmp['data']['items']:
             zhineng_reply(atli['item']['source_content'],atli['user']['mid'],atli['item']['subject_id'],atli['item']['source_id'],atli['item']['target_id'],atli['item']['uri'],atli['item']['business_id'])
         except Exception as e:
             print(e)
-    time.sleep(0.1)
+    time.sleep(30)
 
 
 # file = open(path2+'last_id.txt', 'w')
